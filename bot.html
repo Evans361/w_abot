@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>WhatsApp Bot</title>
+    <script src="https://cdn.jsdelivr.net/npm/whatsapp-web.js@1.11.3/dist/whatsapp-web.js"></script>
+</head>
+<body>
+    <div id="status">WhatsApp Bot Status: <span id="bot-status">Initializing...</span></div>
+    
+    <script>
+        // Initialize the WhatsApp client
+        const client = new window.WhatsAppWeb.Client();
+
+        client.on('ready', () => {
+            console.log('Client is ready!');
+            document.getElementById('bot-status').innerText = 'Client is ready!';
+        });
+
+        client.on('message', async (message) => {
+            const text = message.body;
+            const chatId = message.from;
+
+            // Process the message based on its content and language
+            if (text.startsWith('hello')) {
+                await client.sendMessage(chatId, 'Hi there!');
+            } else if (text.startsWith('how are you')) {
+                await client.sendMessage(chatId, 'I\'m doing well, thanks for asking!');
+            } else if (text.startsWith('image')) {
+                // Handle image requests (this can be expanded later)
+            } else if (text.startsWith('video')) {
+                // Handle video requests (this can be expanded later)
+            } else {
+                // Handle general questions or other inputs
+            }
+        });
+
+        client.initialize();
+    </script>
+</body>
+</html>
